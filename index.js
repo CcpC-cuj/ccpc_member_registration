@@ -15,7 +15,7 @@ if(!email||!email.includes('@')){
     return
 }
     try {
-        const response = await fetch('https://registration-form-h7ze.onrender.com/login', {
+        const response = await fetch('https://ccpc-member-registration.onrender.com/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, password, phone, PreferedLanguage, Skills , reg_no , Batch })
