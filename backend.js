@@ -13,9 +13,9 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname)));
 //during deploy we have remove that one because it renders the file when open on browser
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
+// app.get('/', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'index.html'));
+// });
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
