@@ -15,7 +15,7 @@ if(!email||!email.includes('@')){
     return
 }
     try {
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch('https://registration-form-h7ze.onrender.com/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, password, phone, PreferedLanguage, Skills , reg_no , Batch })
@@ -25,7 +25,7 @@ if(!email||!email.includes('@')){
         if (response.ok) {
             alert(data.message); // Success message
         } else {
-            alert(data.error); // Show error message
+            alert(data.error); // Show error message/
         }
     } catch (error) {
         console.error('Error:', error);
