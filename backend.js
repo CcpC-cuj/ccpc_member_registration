@@ -57,7 +57,7 @@ async function sendEmail(email , name) {
             from: '" Code Crafters Programming Club" <dev.ccpc@gmail.com>',
             to: email,
             subject: "Next Steps for Your Code Crafters Programming Club Registration",
-            text: `Dear ${name},\n` +
+            text: ⁠ Dear ${name},\n ⁠ +
                 "\n" +
                 "Thank you for registering for the Code Crafters Programming Club! We’re thrilled to have you take the next step in joining our community of passionate coders.\n" +
                 "\n" +
@@ -69,7 +69,7 @@ async function sendEmail(email , name) {
                 "✅ Complete the given task within the specified timeline.\n" +
                 "✅ Upload your solution file and provide the GitHub repository link in the response form.\n" +
                 "\n" +
-                `📌 Response Form:https://forms.gle/UbESfaUvxLCADXEj6\n` +
+                ⁠ 📌 Response Form:https://forms.gle/UbESfaUvxLCADXEj6\n ⁠ +
                 "\n" +
                 "Shortlisted candidates will be invited for an interview based on their submissions. This is not just a test but an opportunity to showcase your problem-solving abilities and coding style.\n" +
                 "\n" +
@@ -89,6 +89,7 @@ async function sendEmail(email , name) {
 // POST Request (Fixing Data Storage & Email Sending)
 app.post('/login', async (req, res) => {
     try {
+        console.log(req.body)
         const { email, password, name, phone, PreferedLanguage, Skills, reg_no, Batch } = req.body;
         // Validate required fields
         if (!email || !password || !name || !phone || !PreferedLanguage || !Skills || !reg_no || !Batch) {
@@ -97,17 +98,18 @@ app.post('/login', async (req, res) => {
         // Check if user already exists
         const alreadyExistUser = await User.findOne({ email });
         if (alreadyExistUser) {
-            return res.status(400).json({ message: 'User already exists' });
+            return res.status(400).json({ ok:true , message: 'User already exists' });
         }
         // Create new user
         const newUser = new User({ name, email, password, phone, PreferedLanguage, Skills, reg_no, Batch });
         await newUser.save();
         // Send email
-        const emailSent = await sendEmail(email,name);
-        if (!emailSent) {
-            return res.status(500).json({ message: 'User registered but email failed to send' });
-        }
-        return res.status(200).json({ message: 'Form submitted and email sent successfully' });
+        res.status(200).json({  ok:true , message: 'Form submitted' });
+        sendEmail(email, name).then(emailSent => {
+            if (!emailSent) {
+                console.error('User registered but email failed to send');
+            }
+        }).catch(err => console.error('Email Error:', err));
     } catch (err) {
         console.error('Server Error:', err);
         return res.status(500).json({ error: 'Something went wrong, please try again!' });
