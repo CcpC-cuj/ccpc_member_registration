@@ -68,7 +68,7 @@ app.post('/login', async (req, res) => {
         const { email, name, phone, department, PreferedLanguage, Skills, reg_no, Batch } = req.body;
 
 
-        if (!email || !password || !name || !phone || !preferredLanguage || !skills || !reg_no || !batch) {
+        if (!email || !department || !name || !phone || !preferredLanguage || !skills || !reg_no || !batch) {
             return res.status(400).json({ message: 'All fields are required' });
         }
 
@@ -77,19 +77,20 @@ app.post('/login', async (req, res) => {
             return res.status(400).json({ ok: true, message: 'User already exists' });
         }
 
-        // Hash password before storing
-        const hashedPassword = await bcrypt.hash(password, 10);
 
-        const newUser = new User({ name, email, password: hashedPassword, phone, preferredLanguage, skills, reg_no, batch });
+        const newUser = new User({ name, email, password: department, phone, preferredLanguage, skills, reg_no, batch });
         await newUser.save();
 
         // Send email
-        const emailSent = await sendEmail(email, name);
-        if (!emailSent) {
-            return res.status(500).json({ error: 'User registered but email failed to send. Contact dev.ccpc@gmail.com' });
-        }
-
+        res.json({message: 'Form successfully submitted'})
         res.redirect('https://ccpc-cuj.web.app/');
+        sendEmail(email, name).then(emailSent => {
+            if (!emailSent) {
+                console.error('User registered but email failed to send');
+            }
+        }).catch(err => console.error('Email Error:', err));
+
+        
     } catch (err) {
         console.error('Server Error:', err);
         res.status(500).json({ error: 'Something went wrong, please try again!' });
