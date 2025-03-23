@@ -65,7 +65,8 @@ async function sendEmail(email, name) {
 // User Registration Route
 app.post('/login', async (req, res) => {
     try {
-        const { email, password, name, phone, preferredLanguage, skills, reg_no, batch } = req.body;
+        const { email, name, phone, department, PreferedLanguage, Skills, reg_no, Batch } = req.body;
+
 
         if (!email || !password || !name || !phone || !preferredLanguage || !skills || !reg_no || !batch) {
             return res.status(400).json({ message: 'All fields are required' });
