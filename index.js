@@ -24,6 +24,7 @@ document.getElementById('btn1').addEventListener('click', async function(event) 
     }
 
     try {
+        console.log('I am sending the data')
         const response = await fetch('https://ccpc-member-registration.onrender.com/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
