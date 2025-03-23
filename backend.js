@@ -57,8 +57,8 @@ async function sendEmail(email , name) {
             from: '" Code Crafters Programming Club" <dev.ccpc@gmail.com>',
             to: email,
             subject: "Next Steps for Your Code Crafters Programming Club Registration",
-            text: ⁠ Dear ${name},\n ⁠ +
-                "\n" +
+            text: `Dear ${name},\n` +
+                 "\n" +
                 "Thank you for registering for the Code Crafters Programming Club! We’re thrilled to have you take the next step in joining our community of passionate coders.\n" +
                 "\n" +
                 "To evaluate your skills and approach, we have assigned a task for you. Please find the task details in the document linked below:\n" +
