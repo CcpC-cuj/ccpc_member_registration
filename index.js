@@ -1,4 +1,3 @@
-
 document.getElementById('btn1').addEventListener('click',  async function(event){
     event.preventDefault();
     const email = document.getElementById('email').value;
@@ -15,15 +14,17 @@ if(!email||!email.includes('@')){
     return
 }
     try {
-        const response = await fetch('http://localhost:3000/login', {
+        const response = await fetch('http://localhost:3001/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, password, phone, PreferedLanguage, Skills , reg_no , Batch })
         });
 
         const data = await response.json();
-        if (response.ok) {
+        if (data.ok) {
             alert(data.message); // Success message
+            window.location.href = 'https://ccpc-cuj.web.app/';
+
         } else {
             alert(data.error); // Show error message
         }
