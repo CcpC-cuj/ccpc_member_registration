@@ -22,7 +22,7 @@ if(!email||!email.includes('@')){
         });
 
         const data = await response.json();
-        if (response.ok) {
+        f (data.ok) {
             alert(data.message); // Success message
         } else {
             alert(data.error); // Show error message/
