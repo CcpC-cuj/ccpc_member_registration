@@ -97,7 +97,7 @@ app.post('/login', async (req, res) => {
         // Check if user already exists
         const alreadyExistUser = await User.findOne({ email });
         if (alreadyExistUser) {
-            return res.status(400).json({ 'User already exists' });
+            return res.status(400).json( 'User already exists' );
         }
         // Create new user
         const newUser = new User({ name, email, password, phone, PreferedLanguage, Skills, reg_no, Batch });
