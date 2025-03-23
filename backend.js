@@ -58,7 +58,7 @@ async function sendEmail(email , name) {
             to: email,
             subject: "Next Steps for Your Code Crafters Programming Club Registration",
             text: `Dear ${name},\n` +
-                 "\n" +
+                "\n" +
                 "Thank you for registering for the Code Crafters Programming Club! We’re thrilled to have you take the next step in joining our community of passionate coders.\n" +
                 "\n" +
                 "To evaluate your skills and approach, we have assigned a task for you. Please find the task details in the document linked below:\n" +
@@ -69,7 +69,7 @@ async function sendEmail(email , name) {
                 "✅ Complete the given task within the specified timeline.\n" +
                 "✅ Upload your solution file and provide the GitHub repository link in the response form.\n" +
                 "\n" +
-                ⁠ 📌 Response Form:https://forms.gle/UbESfaUvxLCADXEj6\n ⁠ +
+                `📌 Response Form:https://forms.gle/UbESfaUvxLCADXEj6\n` +
                 "\n" +
                 "Shortlisted candidates will be invited for an interview based on their submissions. This is not just a test but an opportunity to showcase your problem-solving abilities and coding style.\n" +
                 "\n" +
