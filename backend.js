@@ -103,11 +103,15 @@ app.post('/login', async (req, res) => {
         const newUser = new User({ name, email, password, phone, PreferedLanguage, Skills, reg_no, Batch });
         await newUser.save();
         // Send email
-        const emailSent = await sendEmail(email,name);
-        if (!emailSent) {
-            return res.status(500).json({ message: 'User registered but email failed to send' });
-        }
-        return res.status(200).json({ message: 'Form submitted and email sent successfully' });
+        
+         res.status(200).json({ message: 'Form submitted Successfully' });
+        sendEmail(email, name).then(emailSent => {
+            if (!emailSent) {
+                console.error('User registered but email failed to send, contact "dev.ccpc@gmail.com"');
+            }
+        }).catch(err => console.error('Email Error:', err));
+            return res.redirect('https://ccpc-cuj.web.app/')
+
     } catch (err) {
         console.error('Server Error:', err);
         return res.status(500).json({ error: 'Something went wrong, please try again!' });
