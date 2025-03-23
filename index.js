@@ -1,45 +1,34 @@
-document.getElementById('btn1').addEventListener('click', async function(event) {
+
+document.getElementById('btn1').addEventListener('click',  async function(event){
     event.preventDefault();
-
-    const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
-    const phone = document.getElementById('mobile_number').value;
-    const department = document.getElementById('password').value;  // Corrected field
-    const reg_no = document.getElementById('reg').value;
-    const Skills = document.getElementById('skills').value;
-    const PreferedLanguage = document.getElementById('language').value;
-    const Batch = document.getElementById('Batch').value;
+     const password = document.getElementById('password').value;
+const name = document.getElementById('name').value;
+const phone = document.getElementById('mobile_number').value;
+const PreferedLanguage = document.getElementById('language').value;
+const Skills = document.getElementById('skills').value;
+const reg_no = document.getElementById('reg').value;
+const Batch = document.getElementById('Batch').value;
 
-    if (!email || !email.includes('@')) {
-        alert('Please enter a valid email');
-        return;
-    }
-    if (Batch === "") {
-        alert("Please select a Batch");
-        return;
-    }
-    if (PreferedLanguage === "select") {
-        alert("Please select a preferred language");
-        return;
-    }
-
+if(!email||!email.includes('@')){
+    alert('Please enter a valid email');
+    return
+}
     try {
-        console.log('I am sending the data')
-        const response = await fetch('https://ccpc-member-registration.onrender.com/login', {
+        const response = await fetch('http://localhost:3000/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, phone, department, reg_no, Skills, PreferedLanguage, Batch })
+            body: JSON.stringify({ name, email, password, phone, PreferedLanguage, Skills , reg_no , Batch })
         });
 
         const data = await response.json();
-        if (data.ok) {
-            alert(data.message);
-            window.location.href = 'https://ccpc-cuj.web.app/';
+        if (response.ok) {
+            alert(data.message); // Success message
         } else {
-            alert(data.error);
+            alert(data.error); // Show error message
         }
     } catch (error) {
         console.error('Error:', error);
         alert('Something went wrong. Try again!');
     }
-});
+})
