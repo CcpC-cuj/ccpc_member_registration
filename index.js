@@ -23,7 +23,8 @@ if(!email||!email.includes('@')){
 
         const data = await response.json();
         f (data.ok) {
-            alert(data.message); // Success message
+            alert(data.message);// Success message
+            window.redirect ='https://ccpc-cuj.web.app/'
         } else {
             alert(data.error); // Show error message/
         }
