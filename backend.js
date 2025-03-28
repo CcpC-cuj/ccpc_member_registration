@@ -104,15 +104,15 @@ app.post('/login', async (req, res) => {
         const newUser = new User({ name, email, password, phone, PreferedLanguage, Skills, reg_no, Batch });
         await newUser.save();
         // Send email
-        res.status(200).json({  ok:true , message: 'Form submitted' });
+        res.status(200).json({  ok:true , message: 'Form submitted. Check your e-mail'});
         sendEmail(email, name).then(emailSent => {
             if (!emailSent) {
-                console.error('User registered but email failed to send');
+                console.error('User registered but email failed to send. contact us through Website (Reach us Page)');
             }
         }).catch(err => console.error('Email Error:', err));
     } catch (err) {
         console.error('Server Error:', err);
-        return res.status(500).json({ error: 'Something went wrong, please try again!' });
+        return res.status(500).json({ error: 'Something went wrong, please try again! or contact us through Website (Reach us Page)' });
     }
 });
 // Start Server
